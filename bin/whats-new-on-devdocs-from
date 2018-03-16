@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require 'whatsnew/runner'
+
+runner = Whatsnew::Runner.new(ARGV)
+runner.run

@@ -11,23 +11,28 @@ module Whatsnew
       @labels = issue_labels
     end
 
+    UPDATED_MASK = 'update'
+    UPDATED_PHRASE = 'Major updates'
+    NEW_MASK = 'New doc'
+    NEW_PHRASE = 'New topic'
+    TECHNICAL_MASK = 'Technical'
+    TECHNICAL_PHRASE = 'Technical changes'
+
     def versions
       label_versions = @labels.select { |label| /2./.match(label) }
       label_versions.join(', ')
     end
 
     def type
-      updated_mask = 'update'
-      updated_phrase = 'Updated'
-      new_mask = 'New'
-      new_phrase = 'New'
-      label_type = @labels.select {|label| /[#{updated_mask}]||[#{new_mask}]/.match(label)}
+      label_type = @labels.select {|label| /[#{UPDATED_MASK}]||[#{NEW_MASK}]||[#{TECHNICAL_MASK}]/.match(label)}
       case label_type.join
-      when /#{updated_mask}/
-        updated_phrase
-      when /#{new_mask}/
-        new_phrase
-      end
+      when /#{UPDATED_MASK}/
+        UPDATED_PHRASE
+      when /#{NEW_MASK}/
+        NEW_PHRASE
+      when /#{TECHNICAL_MASK}/
+        TECHNICAL_PHRASE
+      end    
     end
 
     def parse_body

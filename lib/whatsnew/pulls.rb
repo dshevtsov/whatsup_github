@@ -13,7 +13,7 @@ module Whatsnew
     end
 
     def filtered
-      updated_topics.items + new_topics.items
+      updated_topics.items + new_topics.items + technical_changes.items
     end
 
     def updated_topics
@@ -22,6 +22,10 @@ module Whatsnew
 
     def new_topics
       search_issues('New doc')
+    end
+
+    def technical_changes
+      search_issues('Technical')
     end
 
     private

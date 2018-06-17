@@ -1,24 +1,26 @@
 require_relative 'row'
 require_relative 'pulls'
 
-# Creates Row objects for the future table
 module Whatsnew
+  # Creates Row objects for the future table
   class RowCollector
+    attr_reader :repo, :since
 
-    def initialize(repo, since)
-      @repo = repo
-      @since = since
+    def initialize(args = {})
+      @repo = args[:repo]
+      @since = args[:since]
     end
 
     def collect_rows
-      pulls.collect do |pull|
+      pulls.map do |pull|
         Row.new(
-          @repo,
-          pull.number,
-          pull.title,
-          pull.body,
-          pull.closed_at,
-          label_names(pull.labels)
+          repo: repo,
+          pr_number: pull.number,
+          pr_title: pull.title,
+          pr_body: pull.body,
+          date: pull.closed_at,
+          pr_labels: label_names(pull.labels),
+          assignee: pull.assignee.login
         )
       end
     end
@@ -26,15 +28,11 @@ module Whatsnew
     private
 
     def label_names(labels)
-      label_names = []
-      labels.each do |label|
-        label_names << label.name
-      end
-      label_names
+      labels.map {|label| label.name} 
     end
 
     def pulls
-      Pulls.new(@repo, @since).filtered
+      Pulls.new(repo: repo, since: since).filtered
     end
   end
 end

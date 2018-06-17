@@ -1,21 +1,26 @@
 require_relative 'row_collector'
 
-# I expect an array of hashes
 module Whatsnew
+  # Table containing Rows
   class Table
+    attr_reader :since
 
     def initialize(since)
-      @repos = { private: 'magento/devdocs_internal', public: 'magento/devdocs' }
       @since = since
     end
 
+    def repos
+      { private: 'magento/devdocs_internal',
+        public: 'magento/devdocs' }
+    end
+
     def collect_public
-      collector = create_collector(@repos[:public], @since)
+      collector = create_collector(repos[:public], since)
       collector.collect_rows
     end
 
     def collect_private
-      collector = create_collector(@repos[:private], @since)
+      collector = create_collector(repos[:private], since)
       collector.collect_rows
     end
 
@@ -24,7 +29,10 @@ module Whatsnew
     end
 
     def sort_all_by_date
-      collect_all.sort_by { |c| DateTime.parse(c.date) }.reverse!
+      collect_all.sort_by do |c|
+        Date.parse(c.date)
+      end
+      collect_all.reverse!
     end
 
     def generate_markdown_array
@@ -40,7 +48,7 @@ module Whatsnew
     private
 
     def create_collector(repo, since)
-      RowCollector.new(repo, since)
+      RowCollector.new(repo: repo, since: since)
     end
   end
 end

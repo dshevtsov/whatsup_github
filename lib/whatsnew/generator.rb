@@ -1,9 +1,8 @@
 require_relative 'table'
 
-# Creates the final table
 module Whatsnew
+  # Creates the final table
   class Generator
-
     def initialize(date)
       @date = date
     end

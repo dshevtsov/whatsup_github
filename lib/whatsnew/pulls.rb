@@ -1,66 +1,82 @@
 require 'octokit'
-require 'time'
-require'yaml'
+require 'date'
+require_relative 'config-reader'
 
-# Gets pull requests from GitHub
 module Whatsnew
+  # Gets pull filtered pull requests from GitHub
   class Pulls
+    attr_reader :repo
 
-    def initialize(repo, since)
-      @repo = repo
-      @since = to_time(since)
-      @filtered ||= filtered
+    def initialize(args = {})
+      @repo = args[:repo] || default_repo # the default repo is public devdocs
+      @since = args[:since] || default_since # the default value is one week
     end
 
     def filtered
-      updated_topics.items + new_topics.items + technical_changes.items
+      issues = []
+      labels.each do |label|
+        issues += search_issues(label).items
+      end
+      issues
     end
 
-    def updated_topics
-      search_issues('Doc update')
-    end
-
-    def new_topics
-      search_issues('New doc')
-    end
-
-    def technical_changes
-      search_issues('Technical')
+    def since
+      if !@since.is_a?(String)
+        format_date(@since.join)
+      else
+        format_date(@since)
+      end
     end
 
     private
 
-    def access_token
-      unless File.exist?('credentials.yml')
-        raise "#{Dir.pwd} Cannot find a file with your internal github token. Please use \"credentials.yml.dist\" to create \"credentials.yml\" and enter your internal github token."
-      end
-      YAML.load_file('credentials.yml')
+    def default_since
+      week_ago.to_s
     end
 
-    def read_config
-      unless File.exist?('config.yml')
-        raise 'Cannot find a file with your configuration settings.'
-        Dir.pwd
-      end
-      YAML.load_file('config.yml')
+    def week_ago
+      Date.today - 7
+    end
+
+    def default_repo
+      'magento/devdocs'
+    end
+
+    def format_date(date)
+      Date.parse(date).to_s
+    end
+
+    def access_token
+      credentials.read['github_token']
+    end
+
+    def config
+      Whatsnew::Config.new('config.yml')
+    end
+
+    def labels
+      config.read['labels']
+    end
+
+    def base_branch
+      config.read['base_branch']
+    end
+
+    def credentials
+      Whatsnew::Config.new('credentials.yml')
     end
 
     def client
-      Octokit::Client.new(access_token: access_token['github_token'])
+      Octokit::Client.new(access_token: access_token)
     end
 
     def search_issues(label)
       auto_paginate
-      client.search_issues("repo:#{@repo} label:\"#{label}\" merged:>=#{@since} base:#{read_config['base_branch']}")
+      client.search_issues("repo:#{repo} label:\"#{label}\" merged:>=#{since} base:#{base_branch}")
     end
 
     def auto_paginate
       Octokit.auto_paginate = true
-    end
-
-    def to_time(date)
-      time = Time.parse(date.join)
-      time.strftime('%Y-%m-%d')
     end
   end
 end

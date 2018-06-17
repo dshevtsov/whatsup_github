@@ -1,52 +1,63 @@
-# Row to be converted to entry in future table
 module Whatsnew
+  # Row to be converted to entry in future table
   class Row
-    attr_reader :date
-    def initialize(repo, issue_number, pr_title, pr_body, pr_merged_at, issue_labels)
-      @repo = repo
-      @issue_number = issue_number
-      @title = pr_title
-      @body = pr_body
-      @date = pr_merged_at.strftime('%b %d')
-      @labels = issue_labels
+    attr_reader :body, :title, :labels, :pr_number, :assignee
+    def initialize(args)
+      @repo = args[:repo]
+      @title = args[:pr_title]
+      @body = args[:pr_body]
+      @date = args[:date]
+      @labels = args[:pr_labels]
+      @assignee = args[:assignee]
+      @pr_number = args[:pr_number]
     end
 
-    UPDATED_MASK = 'update'
-    UPDATED_PHRASE = 'Major updates'
-    NEW_MASK = 'New doc'
-    NEW_PHRASE = 'New topic'
-    TECHNICAL_MASK = 'Technical'
-    TECHNICAL_PHRASE = 'Technical changes'
+    UPDATED_MASK = 'Major update'.freeze
+    UPDATED_PHRASE = 'Major update'.freeze
+    NEW_MASK = 'New doc'.freeze
+    NEW_PHRASE = 'New topic'.freeze
+    TECHNICAL_MASK = 'Technical'.freeze
+    TECHNICAL_PHRASE = 'Technical changes'.freeze
 
     def versions
-      label_versions = @labels.select { |label| /2./.match(label) }
+      label_versions = labels.select { |label| /2./.match(label) }
       label_versions.join(', ')
     end
 
+    def date
+      @date.strftime('%b %d')
+    end
+
     def type
-      label_type = @labels.select {|label| /[#{UPDATED_MASK}]||[#{NEW_MASK}]||[#{TECHNICAL_MASK}]/.match(label)}
-      case label_type.join
-      when /#{UPDATED_MASK}/
+      labels_string = labels.join(" ")
+      label_type = %r{#{ UPDATED_MASK }|#{ NEW_MASK }|#{ TECHNICAL_MASK }}.match(labels_string)
+      case label_type.to_s
+      when /#{ UPDATED_MASK }/
         UPDATED_PHRASE
-      when /#{NEW_MASK}/
+      when /#{ NEW_MASK }/
         NEW_PHRASE
-      when /#{TECHNICAL_MASK}/
+      when /#{ TECHNICAL_MASK }/
         TECHNICAL_PHRASE
-      end    
+      end
     end
 
     def parse_body
-      whatsnew_splited = @body.split('whatsnew')[-1]
+      whatsnew_splited = body.split('whatsnew')[-1]
       newline_splited = whatsnew_splited.split("\n")
       cleaned_array = newline_splited.map { |e| e.delete "\r\*" }
       cleaned_array.delete('')
       striped_array = cleaned_array.map(&:strip)
-      striped_array.join("<br/>")
+      striped_array.join('<br/>')
     end
 
     def description
-      return parse_body if @body.include?('whatsnew')
-      return "[#{@title}]()"
+      if body.include?('whatsnew')
+        parse_body
+      else
+        message = "MISSING WHATSNEW in the PR \##{pr_number}: \"#{title}\" assigned to #{assignee}"
+        puts message
+        message
+      end
     end
   end
 end

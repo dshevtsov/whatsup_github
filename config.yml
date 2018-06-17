@@ -1,2 +1,8 @@
 # The name of base branch in GitHub PRs
 base_branch: develop
+
+# Labels to be searched
+labels:
+  - New doc
+  - Major update
+  - Technical

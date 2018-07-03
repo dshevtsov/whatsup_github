@@ -13,6 +13,7 @@ module Whatsnew
 
     def collect_rows
       pulls.map do |pull|
+        #require 'debug'
         Row.new(
           repo: repo,
           pr_number: pull.number,
@@ -20,12 +21,20 @@ module Whatsnew
           pr_body: pull.body,
           date: pull.closed_at,
           pr_labels: label_names(pull.labels),
-          assignee: pull.assignee.login
+          assignee: assignee(pull.assignee)
         )
       end
     end
 
     private
+
+    def assignee(assignee)
+      unless assignee.nil?
+        assignee.login
+      else 
+        'NOBODY'
+      end
+    end
 
     def label_names(labels)
       labels.map {|label| label.name} 

@@ -1,5 +1,5 @@
 # The name of base branch in GitHub PRs
-base_branch: develop
+base_branch: master
 
 # Labels to be searched
 labels:

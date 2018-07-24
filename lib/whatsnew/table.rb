@@ -29,10 +29,18 @@ module Whatsnew
     end
 
     def sort_all_by_date
-      collect_all.sort_by do |c|
+      sorted = sort_by_date(collect_all)
+      reverse(sorted)
+    end
+
+    def sort_by_date(collection)
+      collection.sort_by do |c|
         Date.parse(c.date)
       end
-      collect_all.reverse!
+    end
+
+    def reverse(collection)
+      collection.reverse
     end
 
     def generate_markdown_array

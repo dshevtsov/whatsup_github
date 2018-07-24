@@ -2,7 +2,7 @@ require 'optparse'
 
 module Whatsnew
   class Options
-    VERSION = '0.0.2'.freeze
+    VERSION = '3'.freeze
     attr_reader :since
 
     def initialize(argv)

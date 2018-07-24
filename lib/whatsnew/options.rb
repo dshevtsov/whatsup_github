@@ -14,7 +14,7 @@ module Whatsnew
 
     def parse(argv)
       OptionParser.new do |opts|
-        opts.banner = 'Usage: whats-new-on-devdocs-from [options] date...'
+        opts.banner = 'Usage: whats-new-on-devdocs-from [options] [date]'
 
         opts.on('-v', '--version', VERSION) do
           puts opts

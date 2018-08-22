@@ -29,6 +29,8 @@ module Whatsnew
       @parser ||= OptionParser.new do |parser|
         parser.banner = "Usage: whats-new-on-devdocs [--since] ['date']"
         parser.separator ""
+        parser.separator "Example: whats-new-on-devdocs --since 'aug 17'"
+        parser.separator ""
         parser.separator "If --since or 'date' was not provided, the tool generates the updates for the past week."
         parser.separator ""
         parser.separator "Specific options:"

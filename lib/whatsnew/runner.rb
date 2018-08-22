@@ -3,10 +3,10 @@ require_relative 'options'
 
 module Whatsnew
   class Runner
-    attr_reader :argv
+    attr_reader :args
 
-    def initialize(argv)
-      @argv = argv
+    def initialize(args)
+      @args = args
     end
 
     def output_file
@@ -19,11 +19,11 @@ module Whatsnew
     end
 
     def options
-      Options.new(argv)
+      Options.parse(args)
     end
 
     def date
-      options.since
+      options.since.to_s
     end
 
     def table

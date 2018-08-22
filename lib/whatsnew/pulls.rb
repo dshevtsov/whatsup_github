@@ -9,7 +9,7 @@ module Whatsnew
 
     def initialize(args = {})
       @repo = args[:repo] || default_repo # the default repo is public devdocs
-      @since = args[:since] || default_since # the default value is one week
+      @since = args[:since] # the default value is one week
     end
 
     def filtered
@@ -21,29 +21,13 @@ module Whatsnew
     end
 
     def since
-      if !@since.is_a?(String)
-        format_date(@since.join)
-      else
-        format_date(@since)
-      end
+      @since
     end
 
     private
 
-    def default_since
-      week_ago.to_s
-    end
-
-    def week_ago
-      Date.today - 7
-    end
-
     def default_repo
       'magento/devdocs'
-    end
-
-    def format_date(date)
-      Date.parse(date).to_s
     end
 
     def access_token

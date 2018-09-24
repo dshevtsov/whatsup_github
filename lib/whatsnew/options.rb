@@ -5,7 +5,7 @@ require 'pp'
 
 module Whatsnew
   class Options
-    Version = '4'.freeze
+    Version = '5'.freeze
 
     class ScriptOptions
       attr_accessor :verbose, :since

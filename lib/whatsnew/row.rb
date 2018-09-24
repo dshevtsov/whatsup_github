@@ -20,12 +20,12 @@ module Whatsnew
     TECHNICAL_PHRASE = 'Technical changes'.freeze
 
     def versions
-      label_versions = labels.select { |label| /2./.match(label) }
+      label_versions = labels.select { |label| /\A\d.\d|x/.match(label) }
       label_versions.join(', ')
     end
 
     def date
-      @date.strftime('%b %d')
+      @date.strftime('%B %e')
     end
 
     def type

@@ -20,9 +20,7 @@ module Whatsnew
       issues
     end
 
-    def since
-      @since
-    end
+    attr_reader :since
 
     private
 

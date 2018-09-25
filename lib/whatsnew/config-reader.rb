@@ -13,7 +13,7 @@ module Whatsnew
       unless File.exist?(filename)
         raise <<-MESSAGE
         Cannot find the #{filename} file. Use a template in #{filename}.dist to create #{filename}.."
-                MESSAGE
+        MESSAGE
       end
       load
     end

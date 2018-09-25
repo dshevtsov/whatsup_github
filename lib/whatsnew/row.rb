@@ -29,8 +29,8 @@ module Whatsnew
     end
 
     def type
-      labels_string = labels.join(" ")
-      label_type = %r{#{ UPDATED_MASK }|#{ NEW_MASK }|#{ TECHNICAL_MASK }}.match(labels_string)
+      labels_string = labels.join(' ')
+      label_type = /#{ UPDATED_MASK }|#{ NEW_MASK }|#{ TECHNICAL_MASK }/.match(labels_string)
       case label_type.to_s
       when /#{ UPDATED_MASK }/
         UPDATED_PHRASE

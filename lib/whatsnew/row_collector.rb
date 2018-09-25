@@ -13,7 +13,7 @@ module Whatsnew
 
     def collect_rows
       pulls.map do |pull|
-        #require 'debug'
+        # require 'debug'
         Row.new(
           repo: repo,
           pr_number: pull.number,
@@ -29,15 +29,15 @@ module Whatsnew
     private
 
     def assignee(assignee)
-      unless assignee.nil?
-        assignee.login
-      else 
+      if assignee.nil?
         'NOBODY'
+      else
+        assignee.login
       end
     end
 
     def label_names(labels)
-      labels.map {|label| label.name} 
+      labels.map(&:name)
     end
 
     def pulls

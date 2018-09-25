@@ -20,7 +20,7 @@ module Whatsnew
     TECHNICAL_PHRASE = 'Technical changes'.freeze
 
     def versions
-      label_versions = labels.select { |label| /\A\d.\d|x/.match(label) }
+      label_versions = labels.select { |label| /\A[12]\.[\dx]/.match(label) }
       label_versions.join(', ')
     end
 

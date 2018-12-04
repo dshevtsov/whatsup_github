@@ -45,7 +45,7 @@ module Whatsnew
 
     def generate_markdown_array
       sort_all_by_date.collect do |object|
-        "#{object.description}|#{object.versions}|#{object.type}|#{object.date}\n"
+        "| #{object.description} | #{object.versions} | #{object.type} | #{object.date} |\n"
       end
     end
 

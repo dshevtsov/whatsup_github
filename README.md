@@ -5,15 +5,16 @@ It filters the PRs merged into [magento/devdocs](https://github.com/magento/devd
 You only need to provide the date since when you want to check changes on devdocs.
 By default, --since means the date week ago.
 
-
 Examples:
 
 Generate the table with recent updates since April 2 till today:
+
 ```bash
 bin/whats-new-on-devdocs --since 'apr 2'
 ```
 
 Generate the table with recent updates for the past week:
+
 ```bash
 bin/whats-new-on-devdocs
 ```
@@ -25,7 +26,7 @@ The result is returned into `/whats-new-on-devdocs.md`.
 ## Prerequisites
 
 * [Ruby 2](https://www.ruby-lang.org/en/documentation/installation/)
-* (Optional). To set up access to internal repos, create _credentials.yml_ from _credentials.yml.dist_.
+* (Optional). To set up access to internal repositories, create _credentials.yml_ from _credentials.yml.dist_.
 * The script uses the GitHub API wrapper [octokit](https://github.com/octokit/octokit.rb):
 
 ```bash

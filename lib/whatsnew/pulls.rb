@@ -1,15 +1,14 @@
 require 'octokit'
-require 'date'
 require_relative 'config-reader'
 
 module Whatsnew
   # Gets pull filtered pull requests from GitHub
   class Pulls
-    attr_reader :repo
+    attr_reader :since, :repo
 
     def initialize(args = {})
       @repo = args[:repo] || default_repo # the default repo is public devdocs
-      @since = args[:since] # the default value is one week
+      @since = args[:since]
     end
 
     def filtered
@@ -19,8 +18,6 @@ module Whatsnew
       end
       issues
     end
-
-    attr_reader :since
 
     private
 
@@ -62,4 +59,3 @@ module Whatsnew
     end
   end
 end
-# test: pulls = Pulls.new('magento/devdocs_internal', '1 May')

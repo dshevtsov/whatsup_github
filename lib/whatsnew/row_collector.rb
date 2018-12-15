@@ -1,29 +1,35 @@
 require_relative 'row'
 require_relative 'pulls'
+require_relative 'config-reader'
 
 module Whatsnew
   # Creates Row objects for the future table
   class RowCollector
-    attr_reader :repo, :since
+    attr_reader :repos, :since
 
     def initialize(args = {})
-      @repo = args[:repo]
+      @repos = config.read['repos']
       @since = args[:since]
     end
 
     def collect_rows
-      pulls.map do |pull|
-        # require 'debug'
-        Row.new(
-          repo: repo,
-          pr_number: pull.number,
-          pr_title: pull.title,
-          pr_body: pull.body,
-          date: pull.closed_at,
-          pr_labels: label_names(pull.labels),
-          assignee: assignee(pull.assignee)
-        )
+      rows = []
+      repos.each do |repo|
+        rows_from_repo =
+          pulls(repo).map do |pull|
+            Row.new(
+              repo: repo,
+              pr_number: pull.number,
+              pr_title: pull.title,
+              pr_body: pull.body,
+              date: pull.closed_at,
+              pr_labels: label_names(pull.labels),
+              assignee: assignee(pull.assignee)
+            )
+          end
+        rows << rows_from_repo
       end
+      rows.flatten
     end
 
     private
@@ -40,8 +46,12 @@ module Whatsnew
       labels.map(&:name)
     end
 
-    def pulls
+    def pulls(repo)
       Pulls.new(repo: repo, since: since).filtered
+    end
+
+    def config
+      Whatsnew::Config.new('config.yml')
     end
   end
 end

@@ -1,8 +1,17 @@
-# The name of base branch in GitHub PRs
+# Name of the base branch in GitHub PRs
 base_branch: master
 
-# Labels to be searched
+# Repos for scanning
+repos:
+  - magento/devdocs
+  - magento/devdocs_internal
+
+# Labels for search
 labels:
   - New doc
   - Major update
   - Technical
+
+# output:
+#   - markdown
+#   - yaml

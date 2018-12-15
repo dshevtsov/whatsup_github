@@ -9,23 +9,9 @@ module Whatsnew
       @since = since
     end
 
-    def repos
-      { private: 'magento/devdocs_internal',
-        public: 'magento/devdocs' }
-    end
-
-    def collect_public
-      collector = create_collector(repos[:public], since)
-      collector.collect_rows
-    end
-
-    def collect_private
-      collector = create_collector(repos[:private], since)
-      collector.collect_rows
-    end
-
     def collect_all
-      collect_public.concat(collect_private)
+      collector = create_collector(since)
+      collector.collect_rows
     end
 
     def sort_all_by_date
@@ -55,8 +41,8 @@ module Whatsnew
 
     private
 
-    def create_collector(repo, since)
-      RowCollector.new(repo: repo, since: since)
+    def create_collector(since)
+      RowCollector.new(since: since)
     end
   end
 end

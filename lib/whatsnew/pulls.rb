@@ -7,7 +7,7 @@ module Whatsnew
     attr_reader :since, :repo
 
     def initialize(args = {})
-      @repo = args[:repo] || default_repo # the default repo is public devdocs
+      @repo = args[:repo]
       @since = args[:since]
     end
 
@@ -21,16 +21,12 @@ module Whatsnew
 
     private
 
-    def default_repo
-      'magento/devdocs'
-    end
-
     def access_token
       credentials.read['github_token']
     end
 
     def config
-      Whatsnew::Config.new('config.yml')
+      Whatsnew::Config.new 'config.yml'
     end
 
     def labels

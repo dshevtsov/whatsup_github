@@ -8,7 +8,7 @@ module Whatsnew
     attr_reader :repos, :since
 
     def initialize(args = {})
-      @repos = config.read['repos']
+      @repos = config.read('repos')
       @since = args[:since]
     end
 
@@ -30,6 +30,21 @@ module Whatsnew
         rows << rows_from_repo
       end
       rows.flatten
+    end
+
+    # def sort_all_by_date
+    #   sorted = sort_by_date(collect_rows)
+    #   reverse(sorted)
+    # end
+
+    def sort_by_date
+      collect_rows.sort_by do |c|
+        Date.parse(c.date)
+      end.reverse
+    end
+
+    def reverse(collection)
+      collection.reverse
     end
 
     private

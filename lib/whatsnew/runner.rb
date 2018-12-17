@@ -1,5 +1,9 @@
+require 'fileutils'
 require_relative 'generator'
 require_relative 'options'
+require_relative 'config-reader'
+require_relative 'yaml-formatter'
+require_relative 'table'
 
 module Whatsnew
   class Runner
@@ -7,27 +11,38 @@ module Whatsnew
 
     def initialize(args)
       @args = args
-    end
-
-    def output_file
-      'whats-new-on-devdocs.md'
+      @generator = Generator.new since
+      @config = Whatsnew::Config.new('config.yml')
+      @content ||= @generator.content
     end
 
     def run
-      open(output_file, 'w') { |file| file << table }
-      puts "Done!\nOpen \"#{output_file}\" to see the result."
+      format = @config.read 'output_format'
+      raise 'Cannot find "output_format" in config.yml' unless format
+      table if format.include? 'markdown'
+      data if format.include? 'yaml'
+    end
+
+    def write_results file, formatter
+      formatted_content = @generator.run formatter, @content
+      File.write file, formatted_content
+      puts "Done!\nOpen \"#{file}\" to see the result."
     end
 
     def options
       Options.parse(args)
     end
 
-    def date
+    def since
       options.since.to_s
     end
 
     def table
-      Generator.new(date).run
+      write_results 'output/whats-new-on-devdocs.md', Table.new
+    end
+
+    def data
+      write_results 'output/whats-new.yml', YAMLFormatter.new
     end
   end
 end

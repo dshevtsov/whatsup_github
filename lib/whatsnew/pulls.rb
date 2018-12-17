@@ -22,27 +22,28 @@ module Whatsnew
     private
 
     def access_token
-      credentials.read['github_token']
+      credentials.read 'github_token'
     end
 
-    def config
+    def configuration
       Whatsnew::Config.new 'config.yml'
     end
 
     def labels
-      config.read['labels']
+      configuration.read 'labels'
     end
 
     def base_branch
-      config.read['base_branch']
+      configuration.read 'base_branch'
     end
 
     def credentials
-      Whatsnew::Config.new('credentials.yml')
+      Whatsnew::Config.new 'credentials.yml'
     end
 
     def client
-      Octokit::Client.new(access_token: access_token)
+      return Octokit::Client.new(access_token: access_token) if access_token
+      Octokit::Client.new
     end
 
     def search_issues(label)

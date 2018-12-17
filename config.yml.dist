@@ -4,14 +4,14 @@ base_branch: master
 # Repos for scanning
 repos:
   - magento/devdocs
-  - magento/devdocs_internal
 
-# Labels for search
+# Labels for filtering
 labels:
   - New doc
   - Major update
   - Technical
 
-# output:
-#   - markdown
-#   - yaml
+# Output format
+output_format:
+  - markdown
+#  - yaml

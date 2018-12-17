@@ -1,14 +1,16 @@
-require_relative 'table'
-
 module Whatsnew
   # Creates the final table
   class Generator
-    def initialize(date)
-      @date = date
+    def initialize(since)
+      @collector = RowCollector.new(since: since)
     end
 
-    def run
-      Table.new(@date).generate_markdown_table
+    def content
+      @collector.sort_by_date
+    end
+
+    def run formatter, content
+      formatter.generate_output_from content
     end
   end
 end

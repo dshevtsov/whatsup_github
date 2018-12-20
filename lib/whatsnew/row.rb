@@ -55,7 +55,7 @@ module Whatsnew
       if body.include?('whatsnew')
         parse_body
       else
-        message = "MISSING WHATSNEW in the PR \##{pr_number}: \"#{title}\" assigned to #{assignee}"
+        message = "MISSING WHATSNEW in the #{type} PR \##{pr_number}: \"#{title}\" assigned to #{assignee} (#{link})"
         puts message
         message
       end

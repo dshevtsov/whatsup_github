@@ -13,7 +13,8 @@ module Whatsnew
           'description' => object.description,
           'versions' => object.versions,
           'type' =>  object.type,
-          'date' => object.date
+          'date' => object.date,
+          'link' => object.link
         }
       end.to_yaml
     end

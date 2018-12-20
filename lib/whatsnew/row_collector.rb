@@ -15,21 +15,24 @@ module Whatsnew
     def collect_rows
       rows = []
       repos.each do |repo|
-        rows_from_repo =
-          pulls(repo).map do |pull|
-            Row.new(
-              repo: repo,
-              pr_number: pull.number,
-              pr_title: pull.title,
-              pr_body: pull.body,
-              date: pull.closed_at,
-              pr_labels: label_names(pull.labels),
-              assignee: assignee(pull.assignee)
-            )
-          end
-        rows << rows_from_repo
+        rows << collect_rows_for_a(repo)
       end
       rows.flatten
+    end
+
+    def collect_rows_for_a(repo)
+      pulls(repo).map do |pull|
+        Row.new(
+          repo: repo,
+          pr_number: pull.number,
+          pr_title: pull.title,
+          pr_body: pull.body,
+          date: pull.closed_at,
+          pr_labels: label_names(pull.labels),
+          assignee: assignee(pull.assignee),
+          pr_url: pull.html_url
+        )
+      end
     end
 
     # def sort_all_by_date

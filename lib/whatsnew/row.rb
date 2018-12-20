@@ -1,7 +1,7 @@
 module Whatsnew
   # Row to be converted to entry in future table
   class Row
-    attr_reader :body, :title, :labels, :pr_number, :assignee
+    attr_reader :body, :title, :labels, :pr_number, :assignee, :link
     def initialize(args)
       @repo = args[:repo]
       @title = args[:pr_title]
@@ -10,6 +10,7 @@ module Whatsnew
       @labels = args[:pr_labels]
       @assignee = args[:assignee]
       @pr_number = args[:pr_number]
+      @link = args[:pr_url]
     end
 
     UPDATED_MASK = 'Major update'.freeze

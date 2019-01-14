@@ -35,11 +35,6 @@ module Whatsnew
       end
     end
 
-    # def sort_all_by_date
-    #   sorted = sort_by_date(collect_rows)
-    #   reverse(sorted)
-    # end
-
     def sort_by_date
       collect_rows.sort_by do |c|
         Date.parse(c.date)

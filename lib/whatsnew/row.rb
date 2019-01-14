@@ -26,7 +26,7 @@ module Whatsnew
     end
 
     def date
-      @date.strftime('%B %e')
+      @date.strftime('%B %e, %Y')
     end
 
     def type

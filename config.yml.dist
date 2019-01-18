@@ -4,6 +4,7 @@ base_branch: master
 # Repos for scanning
 repos:
   - magento/devdocs
+  - magento-mcom/oms-documentation-en
 
 # Labels for filtering
 labels:

@@ -25,8 +25,13 @@ module Whatsnew
 
     def write_results file, formatter
       formatted_content = @generator.run formatter, @content
+      check_dir_at File.dirname file
       File.write file, formatted_content
       puts "Done!\nOpen \"#{file}\" to see the result."
+    end
+
+    def check_dir_at(filepath)
+      FileUtils.mkdir_p filepath unless Dir.exist? filepath
     end
 
     def options

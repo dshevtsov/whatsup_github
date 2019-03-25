@@ -15,7 +15,7 @@ module Whatsnew
 
     UPDATED_MASK = 'Major update'.freeze
     UPDATED_PHRASE = 'Major update'.freeze
-    NEW_MASK = 'New doc'.freeze
+    NEW_MASK = 'New topic'.freeze
     NEW_PHRASE = 'New topic'.freeze
     TECHNICAL_MASK = 'Technical'.freeze
     TECHNICAL_PHRASE = 'Technical changes'.freeze

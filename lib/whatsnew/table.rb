@@ -10,7 +10,7 @@ module Whatsnew
 
     def generate_output_from(content)
       content.collect do |object|
-        "| #{object.description} | #{object.versions} | #{object.type} | #{object.date} |\n"
+        "| #{object.description} | #{object.versions} | #{object.type} | #{object.date} |\n".tr_s(' ', ' ')
       end.join
     end
   end

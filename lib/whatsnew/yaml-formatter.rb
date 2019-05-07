@@ -20,7 +20,7 @@ module Whatsnew
         end
       output =
         {
-          'updated' => Time.now.strftime('%c'),
+          'updated' => Time.now.strftime('%c').tr_s(' ', ' '),
           'entries' => entries
         }
       output.to_yaml

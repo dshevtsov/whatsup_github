@@ -16,7 +16,6 @@ module Whatsnew
             'date' => object.date,
             'link' => object.link
           }
-
         end
       output =
         {

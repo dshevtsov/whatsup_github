@@ -21,7 +21,7 @@ module Whatsnew
     TECHNICAL_PHRASE = 'Technical changes'.freeze
 
     def versions
-      label_versions = labels.select { |label| label.start_with?(/\A\d\.\d/) }
+      label_versions = labels.select { |label| label.start_with?(/\d\./) }
       label_versions.join(', ')
     end
 

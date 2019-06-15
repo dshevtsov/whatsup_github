@@ -1,2 +1,16 @@
+/.bundle/
+/.yardoc
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+
+# rspec failure tracking
+.rspec_status
+
+
 *.yml
-whats-new-on-devdocs.md
+/output/
+*.gem

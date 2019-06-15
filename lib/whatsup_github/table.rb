@@ -1,6 +1,6 @@
 require_relative 'row_collector'
 
-module Whatsnew
+module WhatsupGithub
   # Table containing Rows
   class Table
 

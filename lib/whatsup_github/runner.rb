@@ -5,14 +5,12 @@ require_relative 'config-reader'
 require_relative 'yaml-formatter'
 require_relative 'table'
 
-module Whatsnew
+module WhatsupGithub
   class Runner
-    attr_reader :args
 
-    def initialize(args)
-      @args = args
-      @generator = Generator.new since
-      @config = Whatsnew::Config.new('config.yml')
+    def initialize(date)
+      @generator = Generator.new date
+      @config = WhatsupGithub::Config.new('.whatsnew.yml')
       @content ||= @generator.content
     end
 
@@ -32,14 +30,6 @@ module Whatsnew
 
     def check_dir_at(filepath)
       FileUtils.mkdir_p filepath unless Dir.exist? filepath
-    end
-
-    def options
-      Options.parse(args)
-    end
-
-    def since
-      options.since.to_s
     end
 
     def table

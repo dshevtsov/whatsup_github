@@ -1,7 +1,7 @@
 require 'octokit'
 require_relative 'config-reader'
 
-module Whatsnew
+module WhatsupGithub
   # Gets pull filtered pull requests from GitHub
   class Pulls
     attr_reader :since, :repo
@@ -21,12 +21,12 @@ module Whatsnew
 
     private
 
-    def access_token
-      credentials.read 'github_token'
-    end
+    # def access_token
+    #   credentials.read 'github_token'
+    # end
 
     def configuration
-      Whatsnew::Config.new 'config.yml'
+      WhatsupGithub::Config.new '.whatsnew.yml'
     end
 
     def labels
@@ -37,12 +37,12 @@ module Whatsnew
       configuration.read 'base_branch'
     end
 
-    def credentials
-      Whatsnew::Config.new 'credentials.yml'
-    end
+    # def credentials
+    #   WhatsupGithub::Config.new 'credentials.yml'
+    # end
 
     def client
-      return Octokit::Client.new(access_token: access_token) if access_token
+      # return Octokit::Client.new(access_token: access_token) if access_token
       Octokit::Client.new
     end
 

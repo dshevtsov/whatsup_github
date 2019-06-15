@@ -2,7 +2,7 @@ require_relative 'row'
 require_relative 'pulls'
 require_relative 'config-reader'
 
-module Whatsnew
+module WhatsupGithub
   # Creates Row objects for the future table
   class RowCollector
     attr_reader :repos, :since
@@ -64,7 +64,7 @@ module Whatsnew
     end
 
     def config
-      Whatsnew::Config.new('config.yml')
+      WhatsupGithub::Config.new('.whatsnew.yml')
     end
   end
 end

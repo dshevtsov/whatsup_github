@@ -1,5 +1,5 @@
 require 'yaml'
-module Whatsnew
+module WhatsupGithub
   # Table containing Rows
   class YAMLFormatter
     # def initialize(since)

@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+require 'whatsup_github/cli'
+WhatsupGithub::CLI.start(ARGV)
+
+
+# require 'whatsup_github/runner'
+# runner = WhatsupGithub::Runner.new(ARGV)
+# runner.run

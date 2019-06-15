@@ -3,7 +3,7 @@ require 'optparse/date'
 require 'ostruct'
 require 'pp'
 
-module Whatsnew
+module WhatsupGithub
   class Options
     Version = '7'.freeze
 

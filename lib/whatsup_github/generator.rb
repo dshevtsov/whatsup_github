@@ -1,4 +1,4 @@
-module Whatsnew
+module WhatsupGithub
   # Creates the final table
   class Generator
     def initialize(since)

@@ -13,5 +13,5 @@ labels:
 
 # Output format
 output_format:
-  - markdown
-#  - yaml
+#  - markdown
+  - yaml

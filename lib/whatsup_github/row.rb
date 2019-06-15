@@ -1,4 +1,4 @@
-module Whatsnew
+module WhatsupGithub
   # Row to be converted to entry in future table
   class Row
     attr_reader :body, :title, :labels, :pr_number, :assignee, :link
@@ -55,7 +55,7 @@ module Whatsnew
       if body.include?('whatsnew')
         parse_body
       else
-        message = "MISSING WHATSNEW in the #{type} PR \##{pr_number}: \"#{title}\" assigned to #{assignee} (#{link})"
+        message = "MISSING whatsnew in the #{type} PR \##{pr_number}: \"#{title}\" assigned to #{assignee} (#{link})"
         puts message
         message
       end

@@ -33,11 +33,11 @@ module WhatsupGithub
     end
 
     def table
-      write_results 'output/whats-new-on-devdocs.md', Table.new
+      write_results 'tmp/whats-new-on-devdocs.md', Table.new
     end
 
     def data
-      write_results 'output/whats-new.yml', YAMLFormatter.new
+      write_results 'tmp/whats-new.yml', YAMLFormatter.new
     end
   end
 end

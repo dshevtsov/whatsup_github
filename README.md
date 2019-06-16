@@ -1,6 +1,6 @@
 # WhatsupGithub
 
-The project helps to update the [Whats New on DevDocs](http://devdocs.magento.com/guides/v2.3/whats-new.html).
+The tool helps to update the [Whats New on DevDocs](http://devdocs.magento.com/whats-new.html).
 It filters by labels the pull requests merged into repositories and generates an output in a specified format (`markdown` or/and `yaml`).
 In the command line, provide the date since when you want to check changes.
 By default, the tool filters results for the passed week.
@@ -27,13 +27,13 @@ gem install whatsup_github
 
 ## Usage
 
-Generate the table with recent updates since April 2 till today:
+Generate the output with recent updates since April 2 of the current year till today:
 
 ```bash
 whatsup_github since 'apr 2'
 ```
 
-Generate the table with recent updates for the passed week:
+By default, it generates recent updates for the passed week:
 
 ```bash
 whatsup_github
@@ -54,9 +54,7 @@ In this case, use [`~/.netrc`](https://github.com/octokit/octokit.rb#using-a-net
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the Ruby tests, and `bundle exec cucumber features` to run CLI tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
 ## Contributing
 

@@ -1,0 +1,18 @@
+# Name of the base branch in GitHub PRs
+base_branch: master
+
+# Repositories for scanning. If you want to search private repositories, use credentials to specify 
+repos:
+  - magento/devdocs
+
+# Labels for filtering (currently, hard-coded)
+labels:
+  - New doc
+  - Major update
+  - Technical
+
+# Output format
+output_format:
+#  - markdown
+  - yaml
+  

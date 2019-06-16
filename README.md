@@ -30,18 +30,27 @@ gem install whatsup_github
 Generate the table with recent updates since April 2 till today:
 
 ```bash
-bin/whatsup_github since 'apr 2'
+whatsup_github since 'apr 2'
 ```
 
 Generate the table with recent updates for the passed week:
 
 ```bash
-bin/whatsup_github
+whatsup_github
 ```
 
 You can use different date formats like `'April 2'`, `'2 April'`, `'apr 2'`, `'2 Apr'`, `2018-04-02`.
 
-The result is returned into _output/_.
+The result is returned into _tmp/whats-new.yml_ or _tmp/whats-new.md_ files, depending on the format specified in configuration.
+
+## Configuration
+
+The configuration file [`.whatsup.yml`](lib/template/.whatsup.yml) will be created during the first run.
+
+## Authentication
+
+You can use the tool as anonymous user until you'll need to scan private repositories or merely reach the [rate limit of unauthenticted requests](https://developer.github.com/v3/#rate-limiting).
+In this case, use [`~/.netrc`](https://github.com/octokit/octokit.rb#using-a-netrc-file) file for authentication.
 
 ## Development
 

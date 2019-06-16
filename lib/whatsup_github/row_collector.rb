@@ -64,7 +64,7 @@ module WhatsupGithub
     end
 
     def config
-      WhatsupGithub::Config.new('.whatsnew.yml')
+      Config.instance
     end
   end
 end

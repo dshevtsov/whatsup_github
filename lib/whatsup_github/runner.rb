@@ -1,6 +1,5 @@
 require 'fileutils'
 require_relative 'generator'
-require_relative 'options'
 require_relative 'config-reader'
 require_relative 'yaml-formatter'
 require_relative 'table'
@@ -10,7 +9,7 @@ module WhatsupGithub
 
     def initialize(date)
       @generator = Generator.new date
-      @config = WhatsupGithub::Config.new('.whatsnew.yml')
+      @config = Config.instance
       @content ||= @generator.content
     end
 

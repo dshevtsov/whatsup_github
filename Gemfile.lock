@@ -1,9 +1,10 @@
 PATH
   remote: .
   specs:
-    whatsup_github (1.0.0)
+    whatsup_github (0.0.1)
+      netrc (~> 0.10)
       octokit (~> 4.14)
-      thor
+      thor (~> 0.20)
 
 GEM
   remote: https://rubygems.org/
@@ -48,6 +49,7 @@ GEM
     multi_json (1.13.1)
     multi_test (0.1.2)
     multipart-post (2.1.1)
+    netrc (0.11.0)
     octokit (4.14.0)
       sawyer (~> 0.8.0, >= 0.5.3)
     pry (0.12.2)
@@ -77,10 +79,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  aruba
+  aruba (~> 0.14)
   bundler (~> 1.17)
-  cucumber
-  pry
+  cucumber (~> 3.1)
+  pry (~> 0.12)
   rake (~> 10.0)
   rspec (~> 3.0)
   whatsup_github!

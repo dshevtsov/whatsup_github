@@ -34,12 +34,13 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "octokit", "~> 4.14"
-  spec.add_dependency "thor"
+  spec.add_dependency "thor", "~> 0.20"
+  spec.add_dependency "netrc", "~> 0.10"
 
   spec.add_development_dependency "bundler", "~> 1.17"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
-  spec.add_development_dependency "cucumber"
-  spec.add_development_dependency "aruba"
-  spec.add_development_dependency "pry"
+  spec.add_development_dependency "cucumber", "~> 3.1"
+  spec.add_development_dependency "aruba", "~> 0.14"
+  spec.add_development_dependency "pry", "~> 0.12"
 end

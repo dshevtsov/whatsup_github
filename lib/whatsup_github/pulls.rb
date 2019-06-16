@@ -26,7 +26,7 @@ module WhatsupGithub
     # end
 
     def configuration
-      WhatsupGithub::Config.new '.whatsnew.yml'
+      Config.instance
     end
 
     def labels
@@ -37,13 +37,8 @@ module WhatsupGithub
       configuration.read 'base_branch'
     end
 
-    # def credentials
-    #   WhatsupGithub::Config.new 'credentials.yml'
-    # end
-
     def client
-      # return Octokit::Client.new(access_token: access_token) if access_token
-      Octokit::Client.new
+      Octokit::Client.new(:netrc => true)
     end
 
     def search_issues(label)

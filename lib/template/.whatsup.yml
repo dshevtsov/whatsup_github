@@ -7,7 +7,7 @@ repos:
 
 # Labels for filtering (currently, hard-coded)
 labels:
-  - New doc
+  - New topic
   - Major update
   - Technical
 

@@ -1,5 +1,8 @@
 # WhatsupGithub
 
+[![Build status](https://travis-ci.com/dshevtsov/whatsup_github.svg?branch=master)](https://travis-ci.com/dshevtsov/whatsup_github)
+[![Gem version](https://img.shields.io/gem/v/whatsup_github.svg?style=flat)](https://rubygems.org/gems/whatsup_github)
+
 The tool helps to update the [Whats New on DevDocs](http://devdocs.magento.com/whats-new.html).
 It filters by labels the pull requests merged into repositories and generates an output in a specified format (`markdown` or/and `yaml`).
 In the command line, provide the date since when you want to check changes.

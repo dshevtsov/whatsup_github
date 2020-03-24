@@ -5,7 +5,7 @@ require 'cucumber/rake/task'
 
 RSpec::Core::RakeTask.new(:spec)
 
-task :default => [:spec,:features]
+task :default => :spec
 
 Cucumber::Rake::Task.new(:features) do |t|
   t.cucumber_opts = "--format pretty" # Any valid command line option can go here.

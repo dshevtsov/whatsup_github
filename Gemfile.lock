@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    whatsup_github (0.0.3)
+    whatsup_github (0.1.0)
       netrc (~> 0.10)
       octokit (~> 4.14)
       thor (~> 0.20)

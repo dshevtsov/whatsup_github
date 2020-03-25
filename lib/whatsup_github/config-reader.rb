@@ -22,7 +22,7 @@ module WhatsupGithub
 
     def load_from_yaml
       @config = YAML.load_file @file
-      return {} unless @config
+      return {} if !@config
       @config
     end
   end

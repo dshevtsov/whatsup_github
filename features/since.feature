@@ -10,4 +10,3 @@ Feature: Since
   Scenario: With no subcommand or argument
     When I run `whatsup_github`
     Then the output should contain "PR"
-    

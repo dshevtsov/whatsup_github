@@ -11,14 +11,12 @@ module WhatsupGithub
       @assignee = args[:assignee]
       @pr_number = args[:pr_number]
       @link = args[:pr_url]
+      @config = Config.instance
     end
 
-    UPDATED_MASK = 'Major update'.freeze
-    UPDATED_PHRASE = 'Major update'.freeze
-    NEW_MASK = 'New topic'.freeze
-    NEW_PHRASE = 'New topic'.freeze
-    TECHNICAL_MASK = 'Technical'.freeze
-    TECHNICAL_PHRASE = 'Technical changes'.freeze
+    def labels_from_config
+      @config.read('labels')
+    end
 
     def versions
       label_versions = labels.select { |label| label.start_with?(/\d\./) }
@@ -30,16 +28,7 @@ module WhatsupGithub
     end
 
     def type
-      labels_string = labels.join(' ')
-      label_type = /#{ UPDATED_MASK }|#{ NEW_MASK }|#{ TECHNICAL_MASK }/.match(labels_string)
-      case label_type.to_s
-      when /#{ UPDATED_MASK }/
-        UPDATED_PHRASE
-      when /#{ NEW_MASK }/
-        NEW_PHRASE
-      when /#{ TECHNICAL_MASK }/
-        TECHNICAL_PHRASE
-      end
+      (labels & labels_from_config).join(', ')
     end
 
     def parse_body

@@ -7,4 +7,4 @@ Scenario: Check #1
   Then the file "../whats-new.yml" should contain "type:"
 
 Scenario: Check #2
-  Then the file "../whats-new.yml" should not match /type: $/
+  Then the file "../whats-new.yml" should not match /type: ''$/

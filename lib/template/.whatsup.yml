@@ -7,8 +7,8 @@ repos:
 
 # Labels for filtering (currently, hard-coded)
 labels:
-  - New topic
-  - Major update
+  - New Topic
+  - Major Update
   - Technical
 
 # Output format

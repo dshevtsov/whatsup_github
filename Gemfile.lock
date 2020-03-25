@@ -49,7 +49,7 @@ GEM
     multi_test (0.1.2)
     multipart-post (2.1.1)
     netrc (0.11.0)
-    octokit (4.17.0)
+    octokit (4.18.0)
       faraday (>= 0.9)
       sawyer (~> 0.8.0, >= 0.5.3)
     pry (0.13.0)

@@ -14,7 +14,7 @@ module WhatsupGithub
     end
 
     def run
-      format = @config.read.dig 'output_format'
+      format = @config.output_format
       raise 'Cannot find "output_format" in config.yml' unless format
       table if format.include? 'markdown'
       data if format.include? 'yaml'

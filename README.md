@@ -116,7 +116,7 @@ rake spec
 
 #### features
 
-To run cucumber tests:
+To run Cucumber tests:
 
 ```
 rake features
@@ -128,6 +128,26 @@ To test just file:
 ```
 bundle exec cucumber features/output_file.feature
 ```
+
+NOTE: These tests use initial template of a configuration file at `lib/template/.whatsup.yml`
+
+#### Individual files
+
+Individual files can have tests at the end of file in a format like:
+
+```ruby
+if $PROGRAM_NAME == __FILE__
+  # test code here
+end
+```
+
+To run such test, you may simply run the corresponding file:
+
+```bash
+ruby lib/whatsup_github/config-reader.rb 
+```
+
+The tests use `.whatsup.yml` as a configuration file which is at the root of project .
 
 ## Contributing
 

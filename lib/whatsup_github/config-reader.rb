@@ -21,5 +21,43 @@ module WhatsupGithub
       return {} if !@config
       @config
     end
+
+    def repos
+      read.dig 'repos'
+    end
+
+    def base_branch
+      read.dig 'base_branch'
+    end
+
+    def output_format
+      read.dig 'output_format'
+    end
+
+    def labels
+      required_labels + optional_labels
+    end
+
+    def required_labels
+      res = read.dig 'labels', 'required'
+      return [] unless res
+      res
+    end
+
+    def optional_labels
+      res = read.dig 'labels', 'optional'
+      return [] unless res
+      res
+    end
   end
+end
+
+if $PROGRAM_NAME == __FILE__
+  config = WhatsupGithub::Config.instance
+  p config.repos
+  p config.base_branch
+  p config.output_format
+  p config.labels
+  p config.required_labels
+  p config.optional_labels
 end

@@ -30,11 +30,11 @@ module WhatsupGithub
     end
 
     def labels
-      configuration.read.dig 'labels'
+      configuration.labels
     end
 
     def base_branch
-      configuration.read.dig 'base_branch'
+      configuration.base_branch
     end
 
     def client
@@ -50,4 +50,11 @@ module WhatsupGithub
       Octokit.auto_paginate = true
     end
   end
+end
+
+if $PROGRAM_NAME == __FILE__
+  require 'date'
+  two_weeks_ago = (Date.today - 14).to_s
+  pulls = WhatsupGithub::Pulls.new(repo: 'magento/devdocs', since: two_weeks_ago)
+  p pulls.filtered
 end

@@ -8,7 +8,7 @@ module WhatsupGithub
     attr_reader :repos, :since
 
     def initialize(args = {})
-      @repos = config.read.dig('repos')
+      @repos = config.repos
       @since = args[:since]
     end
 

@@ -6,9 +6,11 @@ repos:
 
 # Labels also will be used as a 'type' value in the output file
 labels:
-  - New Topic
-  - Major Update
-  - Technical
+  required:
+    - New Topic
+    - Major Update
+  optional:
+    - Technical
 
 # Format of output file
 output_format:

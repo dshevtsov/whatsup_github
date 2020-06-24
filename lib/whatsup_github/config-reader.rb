@@ -12,15 +12,11 @@ module WhatsupGithub
       @config = {}
     end
 
-    def read(*options)
+    def read
       unless File.exist?(@file)
         dist_file = File.expand_path("../template/#{@file}", __dir__)
         FileUtils.cp dist_file, @file
       end
-      load_from_yaml.dig options.join ','
-    end
-
-    def load_from_yaml
       @config = YAML.load_file @file
       return {} if !@config
       @config

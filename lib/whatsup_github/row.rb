@@ -15,7 +15,7 @@ module WhatsupGithub
     end
 
     def labels_from_config
-      @config.read('labels')
+      @config.read.dig('labels')
     end
 
     def versions

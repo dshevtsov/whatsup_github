@@ -22,7 +22,7 @@ module WhatsupGithub
     private
 
     # def access_token
-    #   credentials.read 'github_token'
+    #   credentials.dig 'github_token'
     # end
 
     def configuration
@@ -30,11 +30,11 @@ module WhatsupGithub
     end
 
     def labels
-      configuration.read 'labels'
+      configuration.read.dig 'labels'
     end
 
     def base_branch
-      configuration.read 'base_branch'
+      configuration.read.dig 'base_branch'
     end
 
     def client

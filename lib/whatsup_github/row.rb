@@ -18,6 +18,10 @@ module WhatsupGithub
       @config.labels
     end
 
+    def required_labels
+      @config.required_labels
+    end
+
     def versions
       label_versions = labels.select { |label| label.start_with?(/\d\./) }
       label_versions.join(', ')
@@ -41,9 +45,11 @@ module WhatsupGithub
     end
 
     def description
+      # If a PR body includes a phrase 'whatsnew', then parse the body.
+      # If there are at least one required label but PR body does not include what's new, warn about missing 'whatsnew'
       if body.include?('whatsnew')
         parse_body
-      else
+      elsif !(labels & required_labels).empty? && !body.include?('whatsnew')
         message = "MISSING whatsnew in the #{type} PR \##{pr_number}: \"#{title}\" assigned to #{assignee} (#{link})"
         puts message
         message

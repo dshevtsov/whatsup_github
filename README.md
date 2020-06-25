@@ -1,27 +1,29 @@
-# WhatsupGithub
+# whatsup_github
 
 [![Build status](https://travis-ci.com/dshevtsov/whatsup_github.svg?branch=master)](https://travis-ci.com/dshevtsov/whatsup_github)
 [![Gem version](https://img.shields.io/gem/v/whatsup_github.svg?style=flat)](https://rubygems.org/gems/whatsup_github)
 
-This tool helps to update data for [Whats New on DevDocs](http://devdocs.magento.com/whats-new.html).
+This tool helps updating data for [Whats New on DevDocs](http://devdocs.magento.com/whats-new.html).
 It filters GitHub pull requests and generates a data file.
-One pull request - one data entity.
+One pull request sources one data entity.
 All filtering parameters are set in a configuration file, except dates.
 _Since_ date is set as a CLI argument and the _till_ date is always the moment when the command is run.
 
-## Prerequisite
+## What's generated
 
-The resulting data file is generated from data pulled from GitHub.
+A resulting YAML file `tmp/whats-new.yml` is generated from GitHub data.
 
 ### `description`
 
-Pull requests that will appear in search must have text that will fill out the _Description_ cell.
-The text must follow the `whatsnew` keyword and be located at the very bottom of a pull request description field.
+Text for `description` is taken from individual pull request's description (same as body).
+The text must follow the `whatsnew` keyword and be located at the end.
+
+Example:
 
 ```
 This pull request adds ...
 
-...
+Some other details about this pull request.
 
 whatsnew
 Added documentation about [New Magento feature](https://devdocs.magento.com/new-magento-feature.html).
@@ -29,22 +31,34 @@ Added documentation about [New Magento feature](https://devdocs.magento.com/new-
 
 ### `type`
 
-Set as a list of `labels` in `.whatsup.yml`.
+Set as a list of `labels` in `.whatsup.yml`. There are two types of labels in configuration:
+- `required` are labels that must include `whatsnew`. Otherwise, resulting output will warn about missing `whatsnew`.
+- `optional` are labels that may include `whatsnew`. If `whatsnew` is missing, you won't get any notification about this.
 
 ### `versions`
 
-Any GitHub label that starts from a digit followed by a dot (see regex `\d\.`).
+Any GitHub label that starts from a digit followed by a period like in regex `\d\.`.
 Examples: `2.3.x`, `1.0.3-msi`, `2.x`
 
 ### `date`
 
-The date when pull request was merged.
+Date when the pull request was merged.
+
+### `link`
+
+URL of the pull request.
 
 ## Installation
 
-Same as any other gem.
+This gem can be installed as a system command-line tool or as a command-line tool available in a project.
 
-### Using Bundler as a part of your project
+### System installation
+
+```
+gem install whatsup_github
+```
+
+### Project installation
 
 Add to your Gemfile:
 
@@ -52,16 +66,10 @@ Add to your Gemfile:
 gem 'whatsup_github'
 ```
 
-And then execute:
+And install:
 
 ```bash
 bundle
-```
-
-### Separately
-
-```
-gem install whatsup_github
 ```
 
 ## Configuration
@@ -71,6 +79,20 @@ The configuration file [`.whatsup.yml`](lib/template/.whatsup.yml) will be creat
 ## Authentication
 
 Use [`~/.netrc`](https://github.com/octokit/octokit.rb#using-a-netrc-file) file for authentication.
+
+```
+machine api.github.com
+  login <GitHub login>
+  password <GitHub token>
+```
+
+Example:
+
+```
+machine api.github.com
+  login dshevtsov
+  password y9o6YvEoa7IukRWUFdnkpuxNjJ3uwiDQp4zkAdU0
+```
 
 ## Usage
 
@@ -126,14 +148,14 @@ To pass the `output_file.feature` tests, you need to generate a non-empty `whats
 To test just file:
 
 ```
-bundle exec cucumber features/output_file.feature
+bundle exec cucumber features/since.feature
 ```
 
-NOTE: These tests use initial template of a configuration file at `lib/template/.whatsup.yml`
+NOTE: Cucumber tests will use the configuration file from code `lib/template/.whatsup.yml`.
 
 #### Individual files
 
-Individual files can have tests at the end of file in a format like:
+Individual files can have tests at the end of a file in a format like:
 
 ```ruby
 if $PROGRAM_NAME == __FILE__
@@ -141,13 +163,13 @@ if $PROGRAM_NAME == __FILE__
 end
 ```
 
-To run such test, you may simply run the corresponding file:
+To run such test, run the corresponding file:
 
 ```bash
 ruby lib/whatsup_github/config-reader.rb 
 ```
 
-The tests use `.whatsup.yml` as a configuration file which is at the root of project .
+The tests use the root `.whatsup.yml` file to read configuration.
 
 ## Contributing
 

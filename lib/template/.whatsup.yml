@@ -16,3 +16,5 @@ labels:
 output_format:
   - yaml
 #  - markdown
+
+magic_word: whatsnew

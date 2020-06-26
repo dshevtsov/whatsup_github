@@ -49,6 +49,10 @@ module WhatsupGithub
       return [] unless res
       res
     end
+
+    def magic_word
+      read.dig 'magic_word'
+    end
   end
 end
 
@@ -60,4 +64,5 @@ if $PROGRAM_NAME == __FILE__
   p config.labels
   p config.required_labels
   p config.optional_labels
+  p config.magic_word
 end

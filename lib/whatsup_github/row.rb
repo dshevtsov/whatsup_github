@@ -22,6 +22,10 @@ module WhatsupGithub
       @config.required_labels
     end
 
+    def magic_word
+      @config.magic_word
+    end
+
     def versions
       label_versions = labels.select { |label| label.start_with?(/\d\./) }
       label_versions.join(', ')
@@ -36,8 +40,8 @@ module WhatsupGithub
     end
 
     def parse_body
-      whatsnew_splited = body.split('whatsnew')[-1]
-      newline_splited = whatsnew_splited.split("\n")
+      description_splited = body.split(magic_word)[-1]
+      newline_splited = description_splited.split("\n")
       cleaned_array = newline_splited.map { |e| e.delete "\r\*" }
       cleaned_array.delete('')
       striped_array = cleaned_array.map(&:strip)
@@ -47,10 +51,10 @@ module WhatsupGithub
     def description
       # If a PR body includes a phrase 'whatsnew', then parse the body.
       # If there are at least one required label but PR body does not include what's new, warn about missing 'whatsnew'
-      if body.include?('whatsnew')
+      if body.include?(magic_word)
         parse_body
-      elsif !(labels & required_labels).empty? && !body.include?('whatsnew')
-        message = "MISSING whatsnew in the #{type} PR \##{pr_number}: \"#{title}\" assigned to #{assignee} (#{link})"
+      else
+        message = "MISSING #{magic_word} in the #{type} PR \##{pr_number}: \"#{title}\" assigned to #{assignee} (#{link})"
         puts message
         message
       end

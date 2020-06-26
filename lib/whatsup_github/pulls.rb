@@ -13,8 +13,11 @@ module WhatsupGithub
 
     def filtered
       issues = []
-      labels.each do |label|
+      required_labels.each do |label|
         issues += search_issues(label).items
+      end
+      optional_labels.each do |label|
+        issues += search_issues_with_magic_word(label).items
       end
       issues
     end
@@ -29,8 +32,16 @@ module WhatsupGithub
       Config.instance
     end
 
-    def labels
-      configuration.labels
+    def optional_labels
+      configuration.optional_labels
+    end
+
+    def required_labels
+      configuration.required_labels
+    end
+
+    def magic_word
+      configuration.magic_word
     end
 
     def base_branch
@@ -44,6 +55,11 @@ module WhatsupGithub
     def search_issues(label)
       auto_paginate
       client.search_issues("repo:#{repo} label:\"#{label}\" merged:>=#{since} base:#{base_branch}")
+    end
+
+    def search_issues_with_magic_word(label)
+      auto_paginate
+      client.search_issues("repo:#{repo} label:\"#{label}\" merged:>=#{since} base:#{base_branch} \"#{magic_word}\" in:body")
     end
 
     def auto_paginate

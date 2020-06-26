@@ -1,4 +1,4 @@
-### 0.3.0
+## 0.3.0
 
 - Added "magic word" to configuration file
 - Added the requested GitHub query to terminal output (#13)

@@ -54,12 +54,16 @@ module WhatsupGithub
 
     def search_issues(label)
       auto_paginate
-      client.search_issues("repo:#{repo} label:\"#{label}\" merged:>=#{since} base:#{base_branch}")
+      query = "repo:#{repo} label:\"#{label}\" merged:>=#{since} base:#{base_branch}"
+      puts "Searching #{query}"
+      client.search_issues(query)
     end
 
     def search_issues_with_magic_word(label)
       auto_paginate
-      client.search_issues("repo:#{repo} label:\"#{label}\" merged:>=#{since} base:#{base_branch} \"#{magic_word}\" in:body")
+      query = "repo:#{repo} label:\"#{label}\" merged:>=#{since} base:#{base_branch} \"#{magic_word}\" in:body"
+      puts "Searching on GitHub by query #{query}"
+      client.search_issues(query)
     end
 
     def auto_paginate

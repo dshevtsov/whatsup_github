@@ -55,7 +55,7 @@ module WhatsupGithub
     def search_issues(label)
       auto_paginate
       query = "repo:#{repo} label:\"#{label}\" merged:>=#{since} base:#{base_branch}"
-      puts "Searching #{query}"
+      puts "Searching on GitHub by query #{query}"
       client.search_issues(query)
     end
 

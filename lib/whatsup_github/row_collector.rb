@@ -30,6 +30,8 @@ module WhatsupGithub
           date: pull.closed_at,
           pr_labels: label_names(pull.labels),
           assignee: assignee(pull.assignee),
+          author: pull.user.login,
+          author_url: pull.user.html_url,
           pr_url: pull.html_url
         )
       end

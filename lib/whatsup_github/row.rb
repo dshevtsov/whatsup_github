@@ -1,7 +1,7 @@
 module WhatsupGithub
   # Row to be converted to entry in future table
   class Row
-    attr_reader :body, :title, :labels, :pr_number, :assignee, :link
+    attr_reader :body, :title, :labels, :pr_number, :assignee, :link, :author, :author_url
     def initialize(args)
       @repo = args[:repo]
       @title = args[:pr_title]
@@ -9,6 +9,8 @@ module WhatsupGithub
       @date = args[:date]
       @labels = args[:pr_labels]
       @assignee = args[:assignee]
+      @author = args[:author]
+      @author_url = args[:author_url]
       @pr_number = args[:pr_number]
       @link = args[:pr_url]
       @config = Config.instance

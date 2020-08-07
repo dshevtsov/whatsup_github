@@ -13,7 +13,7 @@ Feature: Since
   
   Scenario: With no subcommand or argument
     When I run `whatsup_github`
-    Then the output should contain "PR"
-    Then the output should contain "PR"
+    Then the output should contain "Searching on"
+    Then the output should contain "Done!"
     And the output should not contain "MISSING whatsnew in the Technical"
 

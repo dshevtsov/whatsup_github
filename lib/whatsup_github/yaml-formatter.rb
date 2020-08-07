@@ -14,7 +14,9 @@ module WhatsupGithub
             'versions' => object.versions,
             'type' =>  object.type,
             'date' => object.date,
-            'link' => object.link
+            'link' => object.link,
+            'contributor' => object.author,
+            'profile' => object.author_url
           }
         end
       output =

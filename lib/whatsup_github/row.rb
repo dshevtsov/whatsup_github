@@ -42,7 +42,9 @@ module WhatsupGithub
     end
 
     def parse_body
+      # Split PR description in two parts by 'magic word', and take the second half
       description_splited = body.split(magic_word)[-1]
+      # Convert new line separators to <br> tags
       newline_splited = description_splited.split("\n")
       cleaned_array = newline_splited.map { |e| e.delete "\r\*" }
       cleaned_array.delete('')

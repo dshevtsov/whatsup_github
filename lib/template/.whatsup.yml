@@ -1,6 +1,7 @@
 # Parameters for a GitHub search query
 base_branch: master
 
+# The list of repositories to scan for pull requests
 repos:
   - magento/devdocs
 
@@ -17,4 +18,6 @@ output_format:
   - yaml
 #  - markdown
 
+# The phrase that is used as a separator in the pull request descripion.
+# All the lines that follows this phrase are captured as 'description' for this PR's entry in the resulted data file.
 magic_word: whatsnew

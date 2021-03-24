@@ -1,7 +1,7 @@
 module WhatsupGithub
   # Row to be converted to entry in future table
   class Row
-    attr_reader :body, :title, :labels, :pr_number, :assignee, :link
+    attr_reader :body, :title, :labels, :pr_number, :assignee, :link, :author, :author_url
     def initialize(args)
       @repo = args[:repo]
       @title = args[:pr_title]
@@ -9,6 +9,8 @@ module WhatsupGithub
       @date = args[:date]
       @labels = args[:pr_labels]
       @assignee = args[:assignee]
+      @author = args[:author]
+      @author_url = args[:author_url]
       @pr_number = args[:pr_number]
       @link = args[:pr_url]
       @config = Config.instance
@@ -40,7 +42,9 @@ module WhatsupGithub
     end
 
     def parse_body
+      # Split PR description in two parts by 'magic word', and take the second half
       description_splited = body.split(magic_word)[-1]
+      # Convert new line separators to <br> tags
       newline_splited = description_splited.split("\n")
       cleaned_array = newline_splited.map { |e| e.delete "\r\*" }
       cleaned_array.delete('')

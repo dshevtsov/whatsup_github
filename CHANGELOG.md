@@ -1,3 +1,7 @@
+## 0.3.1
+
+- Added `contributor` and `profile` output data.
+
 ## 0.3.0
 
 - Added "magic word" to configuration file

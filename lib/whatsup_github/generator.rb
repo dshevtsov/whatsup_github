@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module WhatsupGithub
   # Creates the final table
   class Generator
@@ -9,7 +11,7 @@ module WhatsupGithub
       @collector.sort_by_date
     end
 
-    def run formatter, content
+    def run(formatter, content)
       formatter.generate_output_from content
     end
   end

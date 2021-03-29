@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'yaml'
 require 'singleton'
 
@@ -5,6 +7,7 @@ module WhatsupGithub
   # Creates readable objects from confirurarion files
   class Config
     attr_reader :config
+
     include Singleton
 
     def initialize
@@ -18,20 +21,21 @@ module WhatsupGithub
         FileUtils.cp dist_file, @file
       end
       @config = YAML.load_file @file
-      return {} if !@config
+      return {} unless @config
+
       @config
     end
 
     def repos
-      read.dig 'repos'
+      read['repos']
     end
 
     def base_branch
-      read.dig 'base_branch'
+      read['base_branch']
     end
 
     def output_format
-      read.dig 'output_format'
+      read['output_format']
     end
 
     def labels
@@ -41,17 +45,19 @@ module WhatsupGithub
     def required_labels
       res = read.dig 'labels', 'required'
       return [] unless res
+
       res
     end
 
     def optional_labels
       res = read.dig 'labels', 'optional'
       return [] unless res
+
       res
     end
 
     def magic_word
-      read.dig 'magic_word'
+      read['magic_word']
     end
   end
 end

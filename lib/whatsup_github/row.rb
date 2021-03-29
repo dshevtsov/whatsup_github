@@ -1,9 +1,23 @@
+# frozen_string_literal: true
+
 module WhatsupGithub
   # Row to be converted to entry in future table
   class Row
-    attr_reader :body, :title, :labels, :pr_number, :assignee, :link, :author, :author_url
+    attr_reader :body,
+                :title,
+                :labels,
+                :link,
+                :pr_number,
+                :assignee,
+                :author,
+                :author_url,
+                :merge_commit,
+                :is_private
+
     def initialize(args)
       @repo = args[:repo]
+      @repo_url = args[:repo_url]
+      @is_private = args[:private]
       @title = args[:pr_title]
       @body = args[:pr_body]
       @date = args[:date]
@@ -13,6 +27,7 @@ module WhatsupGithub
       @author_url = args[:author_url]
       @pr_number = args[:pr_number]
       @link = args[:pr_url]
+      @merge_commit = args[:merge_commit_sha]
       @config = Config.instance
     end
 

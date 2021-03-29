@@ -1,3 +1,5 @@
+# Changelog
+
 ## 0.3.1
 
 - Added `contributor` and `profile` output data.

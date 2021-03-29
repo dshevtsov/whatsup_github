@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'fileutils'
 require_relative 'generator'
 require_relative 'config-reader'
@@ -6,7 +8,6 @@ require_relative 'table'
 
 module WhatsupGithub
   class Runner
-
     def initialize(date)
       @generator = Generator.new date
       @config = Config.instance
@@ -16,11 +17,12 @@ module WhatsupGithub
     def run
       format = @config.output_format
       raise 'Cannot find "output_format" in config.yml' unless format
+
       table if format.include? 'markdown'
       data if format.include? 'yaml'
     end
 
-    def write_results file, formatter
+    def write_results(file, formatter)
       formatted_content = @generator.run formatter, @content
       check_dir_at File.dirname file
       File.write file, formatted_content

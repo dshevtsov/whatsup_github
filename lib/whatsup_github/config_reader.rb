@@ -56,6 +56,10 @@ module WhatsupGithub
       res
     end
 
+    def membership
+      read['membership']
+    end
+
     def magic_word
       read['magic_word']
     end
@@ -71,4 +75,5 @@ if $PROGRAM_NAME == __FILE__
   p config.required_labels
   p config.optional_labels
   p config.magic_word
+  p config.membership
 end

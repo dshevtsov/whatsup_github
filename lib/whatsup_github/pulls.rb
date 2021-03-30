@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 require 'octokit'
-require_relative 'config-reader'
+require_relative 'config_reader'
 
 module WhatsupGithub
   # Gets issues found on GitHub by query
-  class Pulls
+  module WhatsupGithub
     attr_reader :since, :repo
 
     def initialize(args = {})

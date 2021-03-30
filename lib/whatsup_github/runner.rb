@@ -2,7 +2,7 @@
 
 require 'fileutils'
 require_relative 'generator'
-require_relative 'config-reader'
+require_relative 'config_reader'
 require_relative 'yaml-formatter'
 require_relative 'table'
 

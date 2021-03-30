@@ -166,7 +166,7 @@ end
 To run such test, run the corresponding file:
 
 ```bash
-ruby lib/whatsup_github/config-reader.rb 
+ruby lib/whatsup_github/config_reader.rb 
 ```
 
 The tests use the root `.whatsup.yml` file to read configuration.

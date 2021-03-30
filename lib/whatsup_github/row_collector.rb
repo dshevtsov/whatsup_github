@@ -2,7 +2,7 @@
 
 require_relative 'row'
 require_relative 'pulls'
-require_relative 'config-reader'
+require_relative 'config_reader'
 
 module WhatsupGithub
   # Creates Row objects for the future table
@@ -24,6 +24,7 @@ module WhatsupGithub
 
     def collect_rows_for_a(repo)
       pulls(repo).map do |pull|
+        binding.irb
         Row.new(
           repo: repo,
           repo_url: pull.base.repo.html_url,
@@ -63,12 +64,20 @@ module WhatsupGithub
       end
     end
 
+    def member?(login)
+
+    end
+
     def label_names(labels)
       labels.map(&:name)
     end
 
     def pulls(repo)
       Pulls.new(repo: repo, since: since).data
+    end
+
+    def members
+      Members.new config.membership
     end
 
     def config

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module WhatsupGithub
-  VERSION = "0.3.1"
+  VERSION = '0.4.0'
 end

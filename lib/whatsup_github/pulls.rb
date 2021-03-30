@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'octokit'
-require_relative 'config-reader'
+require_relative 'config_reader'
 
 module WhatsupGithub
-  # Gets pull filtered pull requests from GitHub
+  # Gets issues found on GitHub by query
   class Pulls
     attr_reader :since, :repo
 
@@ -11,15 +13,12 @@ module WhatsupGithub
       @since = args[:since]
     end
 
-    def filtered
-      issues = []
-      required_labels.each do |label|
-        issues += search_issues(label).items
+    def data
+      pull_requests = []
+      filtered_numbers.each do |number|
+        pull_requests << client.pull_request(@repo, number)
       end
-      optional_labels.each do |label|
-        issues += search_issues_with_magic_word(label).items
-      end
-      issues
+      pull_requests
     end
 
     private
@@ -49,7 +48,7 @@ module WhatsupGithub
     end
 
     def client
-      Octokit::Client.new(:netrc => true)
+      Octokit::Client.new(netrc: true)
     end
 
     def search_issues(label)
@@ -69,6 +68,21 @@ module WhatsupGithub
     def auto_paginate
       Octokit.auto_paginate = true
     end
+
+    def filtered_issues
+      issues = []
+      required_labels.each do |label|
+        issues += search_issues(label).items
+      end
+      optional_labels.each do |label|
+        issues += search_issues_with_magic_word(label).items
+      end
+      issues
+    end
+
+    def filtered_numbers
+      filtered_issues.map(&:number)
+    end
   end
 end
 
@@ -76,5 +90,5 @@ if $PROGRAM_NAME == __FILE__
   require 'date'
   two_weeks_ago = (Date.today - 14).to_s
   pulls = WhatsupGithub::Pulls.new(repo: 'magento/devdocs', since: two_weeks_ago)
-  p pulls.filtered
+  p pulls.data
 end

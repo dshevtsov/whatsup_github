@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'yaml'
 module WhatsupGithub
   # Table containing Rows
@@ -12,11 +14,13 @@ module WhatsupGithub
           {
             'description' => object.description,
             'versions' => object.versions,
-            'type' =>  object.type,
+            'type' => object.type,
             'date' => object.date,
             'link' => object.link,
+            'merge_commit' => object.merge_commit,
             'contributor' => object.author,
-            'profile' => object.author_url
+            'membership' => object.membership,
+            'labels' => object.labels
           }
         end
       output =

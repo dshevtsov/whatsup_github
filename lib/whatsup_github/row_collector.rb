@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
 require_relative 'row'
 require_relative 'pulls'
-require_relative 'config-reader'
+require_relative 'config_reader'
+require_relative 'members'
 
 module WhatsupGithub
   # Creates Row objects for the future table
@@ -24,12 +27,17 @@ module WhatsupGithub
       pulls(repo).map do |pull|
         Row.new(
           repo: repo,
+          repo_url: pull.base.repo.html_url,
+          private: pull.base.repo.private?,
           pr_number: pull.number,
           pr_title: pull.title,
           pr_body: pull.body,
-          date: pull.closed_at,
+          date: pull.merged_at,
           pr_labels: label_names(pull.labels),
-          assignee: assignee(pull.assignee),
+          assignee: assignee(pull.assignees),
+          membership: member?(pull.user.login),
+          merger: pull.merged_by.login,
+          merge_commit_sha: pull.merge_commit_sha,
           author: pull.user.login,
           author_url: pull.user.html_url,
           pr_url: pull.html_url
@@ -49,12 +57,18 @@ module WhatsupGithub
 
     private
 
-    def assignee(assignee)
-      if assignee.nil?
+    def assignee(assignees)
+      if assignees.empty?
         'NOBODY'
       else
-        assignee.login
+        assignees.map(&:login).join(', ')
       end
+    end
+
+    def member?(login)
+      return nil unless config.membership
+
+      member_logins.include? login
     end
 
     def label_names(labels)
@@ -62,7 +76,19 @@ module WhatsupGithub
     end
 
     def pulls(repo)
-      Pulls.new(repo: repo, since: since).filtered
+      Pulls.new(repo: repo, since: since).data
+    end
+
+    def load_members
+      return if @members
+
+      @members = Members.new(config.membership).members
+      p 'Hello'
+    end
+
+    def member_logins
+      load_members
+      @members.map(&:login)
     end
 
     def config

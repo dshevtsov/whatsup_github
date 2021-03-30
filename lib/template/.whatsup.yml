@@ -4,6 +4,7 @@ base_branch: master
 # The list of repositories to scan for pull requests
 repos:
   - magento/devdocs
+  - magento-commerce/devdocs
 
 # Labels also will be used as a 'type' value in the output file
 labels:
@@ -21,3 +22,7 @@ output_format:
 # The phrase that is used as a separator in the pull request descripion.
 # All the lines that follows this phrase are captured as 'description' for this PR's entry in the resulted data file.
 magic_word: whatsnew
+
+# An organization to check a contributor for membership.
+# Values: 'true', 'false', empry if not configured.
+membership: magento-commerce

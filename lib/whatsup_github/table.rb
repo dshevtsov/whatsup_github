@@ -1,9 +1,10 @@
+# frozen_string_literal: true
+
 require_relative 'row_collector'
 
 module WhatsupGithub
   # Table containing Rows
   class Table
-
     # def initialize(since)
     #   @collector = RowCollector.new(since: since)
     # end

@@ -3,6 +3,7 @@
 require_relative 'row'
 require_relative 'pulls'
 require_relative 'config_reader'
+require_relative 'members'
 
 module WhatsupGithub
   # Creates Row objects for the future table
@@ -24,7 +25,6 @@ module WhatsupGithub
 
     def collect_rows_for_a(repo)
       pulls(repo).map do |pull|
-        binding.irb
         Row.new(
           repo: repo,
           repo_url: pull.base.repo.html_url,
@@ -35,6 +35,7 @@ module WhatsupGithub
           date: pull.merged_at,
           pr_labels: label_names(pull.labels),
           assignee: assignee(pull.assignees),
+          membership: member?(pull.user.login),
           merger: pull.merged_by.login,
           merge_commit_sha: pull.merge_commit_sha,
           author: pull.user.login,
@@ -65,7 +66,9 @@ module WhatsupGithub
     end
 
     def member?(login)
+      return nil unless config.membership
 
+      member_logins.include? login
     end
 
     def label_names(labels)
@@ -76,8 +79,16 @@ module WhatsupGithub
       Pulls.new(repo: repo, since: since).data
     end
 
-    def members
-      Members.new config.membership
+    def load_members
+      return if @members
+
+      @members = Members.new(config.membership).members
+      p 'Hello'
+    end
+
+    def member_logins
+      load_members
+      @members.map(&:login)
     end
 
     def config

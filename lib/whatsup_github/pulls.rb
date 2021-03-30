@@ -5,7 +5,7 @@ require_relative 'config_reader'
 
 module WhatsupGithub
   # Gets issues found on GitHub by query
-  module WhatsupGithub
+  class Pulls
     attr_reader :since, :repo
 
     def initialize(args = {})

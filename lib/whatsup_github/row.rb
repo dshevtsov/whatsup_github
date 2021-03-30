@@ -12,7 +12,8 @@ module WhatsupGithub
                 :author,
                 :author_url,
                 :merge_commit,
-                :is_private
+                :is_private,
+                :membership
 
     def initialize(args)
       @repo = args[:repo]
@@ -28,6 +29,7 @@ module WhatsupGithub
       @pr_number = args[:pr_number]
       @link = args[:pr_url]
       @merge_commit = args[:merge_commit_sha]
+      @membership = args[:membership]
       @config = Config.instance
     end
 

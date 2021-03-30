@@ -19,6 +19,7 @@ module WhatsupGithub
             'link' => object.link,
             'merge_commit' => object.merge_commit,
             'contributor' => object.author,
+            'membership' => object.membership,
             'labels' => object.labels
           }
         end

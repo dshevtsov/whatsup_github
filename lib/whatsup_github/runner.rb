@@ -3,7 +3,7 @@
 require 'fileutils'
 require_relative 'generator'
 require_relative 'config_reader'
-require_relative 'yaml-formatter'
+require_relative 'yaml_formatter'
 require_relative 'table'
 
 module WhatsupGithub

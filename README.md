@@ -32,6 +32,7 @@ Added documentation about [New Magento feature](https://devdocs.magento.com/new-
 ### `type`
 
 Set as a list of `labels` in `.whatsup.yml`. There are two types of labels in configuration:
+
 - `required` are labels that must include `whatsnew`. Otherwise, resulting output will warn about missing `whatsnew`.
 - `optional` are labels that may include `whatsnew`. If `whatsnew` is missing, you won't get any notification about this.
 
@@ -47,6 +48,22 @@ Date when the pull request was merged.
 ### `link`
 
 URL of the pull request.
+
+### `contributor`
+
+An author of a pull request.
+
+### `merge_commit`
+
+Merge commit SHA of the pull request.
+
+### `membership`
+
+Memebership of the contributor in a configured organization.
+
+### `labels`
+
+All labels added to the pull request.
 
 ## Installation
 

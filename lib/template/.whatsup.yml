@@ -23,5 +23,6 @@ output_format:
 # All the lines that follows this phrase are captured as 'description' for this PR's entry in the resulted data file.
 magic_word: whatsnew
 
-# Organization to check the contributor for membership. Values: true, false, nil.
+# An organization to check a contributor for membership.
+# Values: 'true', 'false', empry if not configured.
 membership: magento-commerce

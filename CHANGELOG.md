@@ -7,6 +7,7 @@
 - Loading more data about pull requests via API
 - Loading data about configured organization members via API
 - Upgraded gem specs
+- Removed non-working tests. TODO: Add tests for the output file.
 
 ### New configuration option
 

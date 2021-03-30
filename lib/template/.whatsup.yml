@@ -11,8 +11,8 @@ labels:
   required:
     - New Topic
     - Major Update
-  # optional:
-  #   - Technical
+  optional:
+    - Technical
 
 # Format of output file
 output_format:

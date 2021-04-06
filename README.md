@@ -20,7 +20,7 @@ The text must follow the `whatsnew` keyword and be located at the end.
 
 Example:
 
-```
+```console
 This pull request adds ...
 
 Some other details about this pull request.
@@ -71,7 +71,7 @@ This gem can be installed as a system command-line tool or as a command-line too
 
 ### System installation
 
-```
+```bash
 gem install whatsup_github
 ```
 
@@ -95,9 +95,11 @@ The configuration file [`.whatsup.yml`](lib/template/.whatsup.yml) will be creat
 
 ## Authentication
 
+### With the .netrc file
+
 Use [`~/.netrc`](https://github.com/octokit/octokit.rb#using-a-netrc-file) file for authentication.
 
-```
+```config
 machine api.github.com
   login <GitHub login>
   password <GitHub token>
@@ -105,10 +107,20 @@ machine api.github.com
 
 Example:
 
-```
+```config
 machine api.github.com
   login dshevtsov
   password y9o6YvEoa7IukRWUFdnkpuxNjJ3uwiDQp4zkAdU0
+```
+
+### With an environment variable
+
+Assign the `WHATSUP_GITHUB_ACCESS_TOKEN` to the GitHub token you want to use, prior the `whatsup_github` command.
+
+Example:
+
+```bash
+WHATSUP_GITHUB_ACCESS_TOKEN=askk494nmfodic68mk whatsup_github since 'apr 2'
 ```
 
 ## Usage
@@ -129,13 +141,13 @@ You can use different date formats like `'April 2'`, `'2 April'`, `'apr 2'`, `'2
 
 To install dependencies:
 
-```
+```bash
 bin/setup
 ```
 
 To install the package:
 
-```
+```bash
 rake install
 ```
 
@@ -149,7 +161,7 @@ The project contains [rspec](https://rspec.info/) tests in `spec` and [cucumber]
 
 To run rspec tests:
 
-```
+```bash
 rake spec
 ```
 
@@ -157,14 +169,14 @@ rake spec
 
 To run Cucumber tests:
 
-```
+```bash
 rake features
 ```
 
 To pass the `output_file.feature` tests, you need to generate a non-empty `whats-new.yml`.
 To test just file:
 
-```
+```bash
 bundle exec cucumber features/since.feature
 ```
 

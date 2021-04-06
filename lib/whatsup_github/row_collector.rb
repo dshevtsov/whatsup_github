@@ -83,7 +83,6 @@ module WhatsupGithub
       return if @members
 
       @members = Members.new(config.membership).members
-      p 'Hello'
     end
 
     def member_logins

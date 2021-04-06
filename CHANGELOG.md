@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.1
+
+- Added authentication via an environment variable `WHATSUP_GITHUB_ACCESS_TOKEN`
+
 ## 0.4.0
 
 ### General

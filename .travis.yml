@@ -3,3 +3,4 @@ sudo: false
 language: ruby
 cache: bundler
 before_install: gem install bundler -v 2.2.15
+script: bundle exec rake spec features

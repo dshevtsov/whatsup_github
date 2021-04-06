@@ -47,8 +47,20 @@ module WhatsupGithub
       configuration.base_branch
     end
 
+    # Authorize with a GitHub token from $WHATSUP_GITHUB_ACCESS_TOKEN if available
+    # Otherwise, use credentials from ~/.netrc
+    # Otherwise, continue as a Guest
     def client
-      Octokit::Client.new(netrc: true)
+      return @client if @client
+
+      @client =
+        if ENV['WHATSUP_GITHUB_ACCESS_TOKEN']
+          Octokit::Client.new(access_token: ENV['WHATSUP_GITHUB_ACCESS_TOKEN'])
+        elsif File.exist? "#{ENV['HOME']}/.netrc"
+          Octokit::Client.new(netrc: true)
+        else
+          Octokit::Client.new
+        end
     end
 
     def search_issues(label)

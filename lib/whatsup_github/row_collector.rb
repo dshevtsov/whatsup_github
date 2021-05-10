@@ -3,7 +3,6 @@
 require_relative 'row'
 require_relative 'pulls'
 require_relative 'config_reader'
-require_relative 'members'
 
 module WhatsupGithub
   # Creates Row objects for the future table
@@ -82,7 +81,7 @@ module WhatsupGithub
     def load_members
       return if @members
 
-      @members = Members.new(config.membership).members
+      @members = client.org_members(config.membership)
     end
 
     def member_logins
@@ -92,6 +91,10 @@ module WhatsupGithub
 
     def config
       Config.instance
+    end
+
+    def client
+      Client.instance
     end
   end
 end

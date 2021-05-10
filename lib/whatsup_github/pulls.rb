@@ -2,6 +2,7 @@
 
 require 'octokit'
 require_relative 'config_reader'
+require_relative 'client'
 
 module WhatsupGithub
   # Gets issues found on GitHub by query
@@ -51,16 +52,7 @@ module WhatsupGithub
     # Otherwise, use credentials from ~/.netrc
     # Otherwise, continue as a Guest
     def client
-      return @client if @client
-
-      @client =
-        if ENV['WHATSUP_GITHUB_ACCESS_TOKEN']
-          Octokit::Client.new(access_token: ENV['WHATSUP_GITHUB_ACCESS_TOKEN'])
-        elsif File.exist? "#{ENV['HOME']}/.netrc"
-          Octokit::Client.new(netrc: true)
-        else
-          Octokit::Client.new
-        end
+      Client.instance
     end
 
     def search_issues(label)

@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.4.2
+
+Fixes:
+
+- Fixed a bug with non-working membership
+
+Maintenance:
+
+- Added code linting
+
 ## 0.4.1
 
 - Added authentication via an environment variable `WHATSUP_GITHUB_ACCESS_TOKEN`

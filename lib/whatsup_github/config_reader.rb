@@ -2,6 +2,7 @@
 
 require 'yaml'
 require 'singleton'
+require 'fileutils'
 
 module WhatsupGithub
   # Creates readable objects from confirurarion files

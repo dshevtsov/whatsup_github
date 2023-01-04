@@ -14,7 +14,7 @@ module WhatsupGithub
 
     desc 'version', 'Current version of the gem'
     def version
-      puts WhatsupGithub::VERSION
+      puts "Current version is #{WhatsupGithub::VERSION}"
     end
   end
 end

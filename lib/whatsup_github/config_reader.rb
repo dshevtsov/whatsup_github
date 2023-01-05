@@ -10,10 +10,10 @@ module WhatsupGithub
     attr_reader :config
 
     include Singleton
-    
+
     @@filename = ''
 
-    def self.filename= filename
+    def self.filename=(filename)
       @@filename = filename
     end
 

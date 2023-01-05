@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    whatsup_github (0.5.0)
+    whatsup_github (1.0.0)
       netrc (~> 0.11)
       octokit (~> 6.0)
       thor (~> 1.2)
@@ -91,6 +91,7 @@ GEM
     thor (1.2.1)
 
 PLATFORMS
+  arm64-darwin-22
   ruby
 
 DEPENDENCIES

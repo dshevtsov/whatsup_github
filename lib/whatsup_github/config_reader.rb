@@ -70,6 +70,10 @@ module WhatsupGithub
     def magic_word
       read['magic_word']
     end
+
+    def enterprise
+      read['enterprise']
+    end
   end
 end
 

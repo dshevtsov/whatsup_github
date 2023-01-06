@@ -78,7 +78,7 @@ module WhatsupGithub
     def enterprise_query(query)
       query.gsub('enterprise:', '')
     end
-    
+
     def query(label)
       "repo:#{repo} label:\"#{label}\" merged:>=#{since} base:#{base_branch} is:pull-request"
     end

@@ -54,7 +54,7 @@ Set as a list of `labels` in `.whatsup.yml`. There are two types of labels in co
 
 ### `versions`
 
-Any GitHub label that starts from a digit followed by a period like in regex `\d\.`.
+Any GitHub label that starts from a digit followed by a period like in regular expression `\d\.`.
 Examples: `2.3.x`, `1.0.3-msi`, `2.x`
 
 ### `date`

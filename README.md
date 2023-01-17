@@ -9,6 +9,22 @@ One pull request sources one data entity.
 All filtering parameters are set in a configuration file, except dates.
 _Since_ date is set as a CLI argument and the _till_ date is always the moment when the command is run.
 
+## CLI
+
+```
+Commands:
+  whatsup_github help [COMMAND]  # Describe available commands or one specific command
+  whatsup_github since DATE      # Filters pull requests since the specified date till now. Default: last 7 days.
+  whatsup_github version         # Current version of the gem
+
+Usage:
+  whatsup_github since DATE
+
+Options:
+  [--config=CONFIG]  # Relative path to the configuration file.
+                     # Default: .whatsup.yml
+```
+
 ## What's generated
 
 A resulting YAML file `tmp/whats-new.yml` is generated from GitHub data.
@@ -59,7 +75,7 @@ Merge commit SHA of the pull request.
 
 ### `membership`
 
-Memebership of the contributor in a configured organization.
+Membership of the contributor in a configured organization.
 
 ### `labels`
 
@@ -91,7 +107,13 @@ bundle
 
 ## Configuration
 
-The configuration file [`.whatsup.yml`](lib/template/.whatsup.yml) will be created automatically after first run unless it's already there.
+The default configuration file [`.whatsup.yml`](lib/template/.whatsup.yml) will be created automatically after first run unless it's already there.
+
+To use non-default location or name of the file, use the --config option. Example:
+
+```
+whatsup_github since 'apr 9' --config 'configs/whatsup_bp.yml'
+```
 
 ## Authentication
 
@@ -109,8 +131,20 @@ Example:
 
 ```config
 machine api.github.com
-  login dshevtsov
+  login mypubliclogin
   password y9o6YvEoa7IukRWUFdnkpuxNjJ3uwiDQp4zkAdU0
+```
+
+Example with GitHub Enterprise:
+
+```
+machine api.github.com
+  login mypubliclogin
+  password y9o6YvEoa7IukRWUFdnkpuxNjJ3uwiDQp4zkAdU0
+
+machine git.enterprise.example.com
+  login myenterpriselogin
+  password y9o6YvEoa7Iuksdo&TFuxNjJ3uwiDQp4zkAdU0
 ```
 
 ### With an environment variable
@@ -202,7 +236,7 @@ The tests use the root `.whatsup.yml` file to read configuration.
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/dshevtsov/whatsup_github. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 

@@ -3,6 +3,7 @@
 require 'octokit'
 require_relative 'config_reader'
 require_relative 'client'
+require_relative 'enterprise_client'
 
 module WhatsupGithub
   # Gets issues found on GitHub by query
@@ -24,10 +25,6 @@ module WhatsupGithub
 
     private
 
-    # def access_token
-    #   credentials.dig 'github_token'
-    # end
-
     def configuration
       Config.instance
     end
@@ -48,25 +45,46 @@ module WhatsupGithub
       configuration.base_branch
     end
 
-    # Authorize with a GitHub token from $WHATSUP_GITHUB_ACCESS_TOKEN if available
-    # Otherwise, use credentials from ~/.netrc
-    # Otherwise, continue as a Guest
     def client
       Client.instance
     end
 
+    def enterprise_client
+      WhatsupGithub::EnterpriseClient.host = configuration.enterprise
+      EnterpriseClient.instance
+    end
+
     def search_issues(label)
       auto_paginate
-      query = "repo:#{repo} label:\"#{label}\" merged:>=#{since} base:#{base_branch} is:pull-request"
-      puts "Searching on GitHub by query #{query}"
-      client.search_issues(query)
+      call_query query(label)
     end
 
     def search_issues_with_magic_word(label)
       auto_paginate
-      query = "repo:#{repo} label:\"#{label}\" merged:>=#{since} base:#{base_branch} \"#{magic_word}\" in:body is:pull-request"
+      call_query query_with_magic_word(label)
+    end
+
+    def call_query(query)
       puts "Searching on GitHub by query #{query}"
-      client.search_issues(query)
+      if repo.start_with? 'enterprise:'
+        enterprise_client.search_issues(
+          enterprise_query(query)
+        )
+      else
+        client.search_issues(query)
+      end
+    end
+
+    def enterprise_query(query)
+      query.gsub('enterprise:', '')
+    end
+
+    def query(label)
+      "repo:#{repo} label:\"#{label}\" merged:>=#{since} base:#{base_branch} is:pull-request"
+    end
+
+    def query_with_magic_word(label)
+      query(label) + " \"#{magic_word}\" in:body"
     end
 
     def auto_paginate

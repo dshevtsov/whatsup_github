@@ -1,7 +1,11 @@
 # Parameters for a GitHub search query
 base_branch: master
 
+# Set hostname to read repos at GitHub Enterprise
+# enterprise: <hostname>
+
 # The list of repositories to scan for pull requests
+# For repos at GitHub Enterprise, add a prefix 'enterprise:'. Example: enterprise:magento/devdocs.
 repos:
   - magento/devdocs
 

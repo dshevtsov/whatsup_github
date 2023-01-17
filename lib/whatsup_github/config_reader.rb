@@ -11,8 +11,14 @@ module WhatsupGithub
 
     include Singleton
 
+    @@filename = ''
+
+    def self.filename=(filename)
+      @@filename = filename
+    end
+
     def initialize
-      @file = '.whatsup.yml'
+      @file = @@filename
       @config = {}
     end
 
@@ -63,6 +69,10 @@ module WhatsupGithub
 
     def magic_word
       read['magic_word']
+    end
+
+    def enterprise
+      read['enterprise']
     end
   end
 end

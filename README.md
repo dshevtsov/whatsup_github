@@ -144,7 +144,7 @@ machine api.github.com
 
 machine git.enterprise.example.com
   login myenterpriselogin
-  password y9o6YvEoa7Iuksdo&TFuxNjJ3uwiDQp4zkAdU0
+  password GtH7yhvEoa7Iuksdo&TFuxNjJ3uwiDQhjbiu8&yhJhG
 ```
 
 ### With an environment variable
@@ -154,7 +154,7 @@ Assign the `WHATSUP_GITHUB_ACCESS_TOKEN` to the GitHub token you want to use, pr
 Example:
 
 ```bash
-WHATSUP_GITHUB_ACCESS_TOKEN=askk494nmfodic68mk whatsup_github since 'apr 2'  #gitleaks:allow
+WHATSUP_GITHUB_ACCESS_TOKEN=askk494nmfodic68mk whatsup_github since 'apr 2'
 ```
 
 ## Usage

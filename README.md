@@ -11,7 +11,7 @@ _Since_ date is set as a CLI argument and the _till_ date is always the moment w
 
 ## CLI
 
-```
+```console
 Commands:
   whatsup_github help [COMMAND]  # Describe available commands or one specific command
   whatsup_github since DATE      # Filters pull requests since the specified date till now. Default: last 7 days.
@@ -111,7 +111,7 @@ The default configuration file [`.whatsup.yml`](lib/template/.whatsup.yml) will 
 
 To use non-default location or name of the file, use the --config option. Example:
 
-```
+```shell
 whatsup_github since 'apr 9' --config 'configs/whatsup_bp.yml'
 ```
 
@@ -137,7 +137,7 @@ machine api.github.com
 
 Example with GitHub Enterprise:
 
-```
+```config
 machine api.github.com
   login mypubliclogin
   password y9o6YvEoa7IukRWUFdnkpuxNjJ3uwiDQp4zkAdU0
@@ -154,7 +154,7 @@ Assign the `WHATSUP_GITHUB_ACCESS_TOKEN` to the GitHub token you want to use, pr
 Example:
 
 ```bash
-WHATSUP_GITHUB_ACCESS_TOKEN=askk494nmfodic68mk whatsup_github since 'apr 2'
+WHATSUP_GITHUB_ACCESS_TOKEN=askk494nmfodic68mk whatsup_github since 'apr 2'  #gitleaks:allow
 ```
 
 ## Usage

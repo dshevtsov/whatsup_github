@@ -31,5 +31,13 @@ module WhatsupGithub
           Octokit::Client.new(netrc: true)
         end
     end
+
+    def search_issues(query)
+      @client.search_issues(query.gsub('enterprise:', ''))
+    end
+
+    def pull_request(repo, number)
+      @client.pull_request(repo.delete_prefix('enterprise:'), number)
+    end
   end
 end

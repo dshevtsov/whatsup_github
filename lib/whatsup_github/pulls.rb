@@ -18,7 +18,11 @@ module WhatsupGithub
     def data
       pull_requests = []
       filtered_numbers.each do |number|
-        pull_requests << client.pull_request(@repo, number)
+        pull_requests << if @repo.start_with? 'enterprise:'
+                           enterprise_client.pull_request(@repo, number)
+                         else
+                           client.pull_request(@repo, number)
+                         end
       end
       pull_requests
     end
@@ -67,16 +71,10 @@ module WhatsupGithub
     def call_query(query)
       puts "Searching on GitHub by query #{query}"
       if repo.start_with? 'enterprise:'
-        enterprise_client.search_issues(
-          enterprise_query(query)
-        )
+        enterprise_client.search_issues(query)
       else
         client.search_issues(query)
       end
-    end
-
-    def enterprise_query(query)
-      query.gsub('enterprise:', '')
     end
 
     def query(label)

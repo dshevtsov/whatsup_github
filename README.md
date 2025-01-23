@@ -1,6 +1,5 @@
 # whatsup_github
 
-[![Build status](https://travis-ci.com/dshevtsov/whatsup_github.svg?branch=master)](https://travis-ci.com/dshevtsov/whatsup_github)
 [![Gem version](https://img.shields.io/gem/v/whatsup_github.svg?style=flat)](https://rubygems.org/gems/whatsup_github)
 
 This tool helps updating data for [Whats New on DevDocs](http://devdocs.magento.com/whats-new.html).

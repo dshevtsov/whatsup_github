@@ -15,3 +15,5 @@
 /.whatsup.yml
 /output/
 *.gem
+.cursor
+Gemfile.lock

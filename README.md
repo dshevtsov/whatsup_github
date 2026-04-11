@@ -1,5 +1,9 @@
 # whatsup_github
 
+> **Archived.** Active development has moved to
+> [commerce-docs/whatsup_github](https://github.com/commerce-docs/whatsup_github).
+> This repository is kept for historical reference only.
+
 [![Gem version](https://img.shields.io/gem/v/whatsup_github.svg?style=flat)](https://rubygems.org/gems/whatsup_github)
 
 This tool helps updating data for [Whats New on DevDocs](http://devdocs.magento.com/whats-new.html).
